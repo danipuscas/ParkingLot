@@ -1,28 +1,27 @@
 package com.parking.parkinglot.entities;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user") // "user" este cuvânt rezervat în SQL. Recomand să-l schimbi în "users"
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generare automată a ID-ului
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Car> cars = new ArrayList<>();
 
     public Collection<Car> getCars() {
