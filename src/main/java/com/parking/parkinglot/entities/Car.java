@@ -17,10 +17,6 @@ public class Car {
     @Column(name = "license_plate")
     private String licensePlate;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    @JoinColumn(name = "user_id", nullable = false) // FK spre User
-    private User owner;
-
     // Getteri și Setteri
     public Long getId() {
         return id;
@@ -46,6 +42,11 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+
     public User getOwner() {
         return owner;
     }
@@ -53,4 +54,5 @@ public class Car {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
 }

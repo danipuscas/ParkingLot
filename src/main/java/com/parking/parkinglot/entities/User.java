@@ -1,6 +1,7 @@
 package com.parking.parkinglot.entities;
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,17 +22,7 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<Car> cars = new ArrayList<>();
-
-    public Collection<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Collection<Car> cars) {
-        this.cars = cars;
-    }
-
+    // Getteri și Setteri
     public String getUsername() {
         return username;
     }
@@ -62,5 +53,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private Collection<Car> cars = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner")
+    public Collection<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Collection<Car> cars) {
+        this.cars = cars;
     }
 }
