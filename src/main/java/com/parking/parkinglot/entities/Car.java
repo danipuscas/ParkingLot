@@ -3,18 +3,15 @@ package com.parking.parkinglot.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "car")
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generare automată a ID-ului
+    @GeneratedValue // Generare automată a ID-ului
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "parking_spot")
     private String parkingSpot;
 
-    @Column(name = "license_plate")
     private String licensePlate;
 
     // Getteri și Setteri

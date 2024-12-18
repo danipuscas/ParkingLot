@@ -6,20 +6,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table(name = "user") // "user" este cuvânt rezervat în SQL. Recomand să-l schimbi în "users"
+@Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generare automată a ID-ului
+    @GeneratedValue // Generare automată a ID-ului
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
     private String email;
 
     // Getteri și Setteri
