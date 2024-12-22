@@ -1,19 +1,22 @@
-package com.parking.parkinglot;//package com.parking.parkinglot;
+package com.parking.parkinglot.servlets;//package com.parking.parkinglot;
 
 import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.UserBean;
+import com.parking.parkinglot.entities.Car;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 @WebServlet(name = "User", value = "/User")
 public class Users extends HttpServlet {
     @Inject
     UserBean userBean;
+    private Collection<Car> cars;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,5 +28,9 @@ public class Users extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Handle POST requests if needed
+    }
+
+    public Collection<Car> getCars() {
+        return cars;
     }
 }

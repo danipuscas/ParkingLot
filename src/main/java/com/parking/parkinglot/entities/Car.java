@@ -1,5 +1,6 @@
 package com.parking.parkinglot.entities;
 
+import com.parking.parkinglot.servlets.Users;
 import jakarta.persistence.*;
 
 @Entity
@@ -53,3 +54,4 @@ public class Car {
     }
 
 }
+
