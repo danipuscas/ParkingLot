@@ -4,14 +4,18 @@
 
 <t:pageTemplate pageTitle="Cars">
   <h1>Cars</h1>
-  <a class="btn btn-primary btn-lg w-100" href="${pageContext.request.contextPath}/AddCar">Add Car</a>
+  <c:if test="${pageContext.request.isUserInRole('WRITE_CARS')}">
+    <a class="btn btn-primary btn-lg w-100" href="${pageContext.request.contextPath}/AddCar">Add Car</a>
+  </c:if>
   <form method="POST" action="${pageContext.request.contextPath}/DeleteCars">
     <div class="container text-center">
       <c:forEach var="car" items="${cars}">
         <div class="row">
-          <div class="col">
-            <input type="checkbox" name="carIds" value="${car.id}">
-          </div>
+          <c:if test="${pageContext.request.isUserInRole('WRITE_CARS')}">
+            <div class="col">
+              <input type="checkbox" name="carIds" value="${car.id}">
+            </div>
+          </c:if>
           <div class="col">
               ${car.licensePlate}
           </div>
@@ -21,13 +25,17 @@
           <div class="col">
               ${car.ownerName}
           </div>
-          <div class="col">
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCar?id=${car.id}">Edit Car</a>
-          </div>
+          <c:if test="${pageContext.request.isUserInRole('WRITE_CARS')}">
+            <div class="col">
+              <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditCar?id=${car.id}">Edit Car</a>
+            </div>
+          </c:if>
         </div>
       </c:forEach>
     </div>
-    <button type="submit" class="btn btn-danger">Delete Selected Cars</button>
+    <c:if test="${pageContext.request.isUserInRole('WRITE_CARS')}">
+      <button type="submit" class="btn btn-danger">Delete Selected Cars</button>
+    </c:if>
   </form>
   <h5>Free parking spots: ${numberOfFreeParkingSpots}</h5>
 </t:pageTemplate>
